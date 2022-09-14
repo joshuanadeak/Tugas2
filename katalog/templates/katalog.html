@@ -1,32 +1,53 @@
+<!--
+This is not my own code implementation
+Implementasi yang saya pahami adalah dengan melakukan loop seperti biasa, pada Lab sebelumnya
+Tetapi, saya melihat ada teman saya yang mengimplement seperti ini, jadi saya berusaha coba ketik ulang untuk memahami yang dia kerjakan
+Dengan begitu, saya juga berusaha untuk mempelajari hal-hal yang belum pernah saya pelajari sebelumnya (terutama tentang css)
+Full credit goes to Daniel Christian Mandolang - 2106630006
+Tetapi karena implementasi sepertinya juga bagian penilaian, saya coba lampirkan implementasi yang saya bisa buat di tambahan.txt
+-->
+
 {% extends 'base.html' %}
 
- {% block content %}
+  {% block content %}
 
-  <h1>Lab 1 Assignment PBP/PBD</h1>
+  <div class="title-container">
+    <h1 class="title">Lab 1 Assignment PBP/PBD</h1>
+  </div>
 
-  <h5>Name: </h5>
+  <h4>Name: </h4>
   <p>{{nama}}</p>
 
-  <h5>Student ID: </h5>
+  <h4>Student ID: </h4>
   <p>{{NPM}}</p>
 
-  <table>
-    <tr>
-      <th>Item Name</th>
-      <th>Item Price</th>
-      <th>Item Stock</th>
-      <th>Rating</th>
-      <th>Description</th>
-      <th>Item URL</th>
+  <table class="table">
+    <tr class="table-header-row">
+      <th class="table-header-cell">Item Name</th>
+      <th class="table-header-cell">Item Price</th>
+      <th class="table-header-cell">Item Stock</th>
+      <th class="table-header-cell">Rating</th>
+      <th class="table-header-cell">Description</th>
+      <th class="table-header-cell">Item URL</th>
     </tr>
-    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-    {% for barang in list_barang %}
-      <tr>
-          <th>{{barang.nama_barang}}</th>
-          <th>{{barang.harga_barang}}</th>
-          <th>{{barang.deskripsi}}</th>
+
+    {% comment %} Add the data below this line {% endcomment %}
+    
+    {% for katalog in list_katalog %}
+      <tr class="table-row">
+        <th class="table-cell">{{katalog.item_name}}</th>
+        <th class="table-cell">{{katalog.item_price}}</th>
+        <th class="table-cell">{{katalog.item_stock}}</th>
+        <th class="table-cell">{{katalog.rating}}</th>
+        <th class="table-cell">{{katalog.description}}</th>
+        <th class="table-cell">
+          <a href="{{katalog.item_url}}">
+            {{katalog.item_url}}
+          </a>
+        </th>
       </tr>
-{% endfor %}
+    {% endfor %}
+
   </table>
 
- {% endblock content %}
+{% endblock content %}
