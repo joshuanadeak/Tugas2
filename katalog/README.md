@@ -1,6 +1,6 @@
 # Tugas 2: Pengenalan Aplikasi dan MVT pada Django
 ---
-Tautan URLnya dapat diklik di link [berikut](https://tugas2pbpjoshuanadeak.herokuapp.com/katalog/)
+Tautan URLnya dapat diklik di link [berikut](https://tugas2pbpjoshuanadeak.herokuapp.com/katalog/).
 Untuk _design_, _all credits to_ Daniel Christian Mandolang. Saya melampirkan penerapan saya pribadi, tapi saya memakai yang ada pada program dia, karena bentuknya lebih bagus sekaligus mempelajari cara kerja CSS.
 
 ## Bagan _Request-Response Client_
