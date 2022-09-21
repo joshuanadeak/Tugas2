@@ -1,0 +1,113 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Mr. Bean's Holiday",
+            "rating": 5,
+            "release_date": "2007-03-24",
+            "review": "Mr Bean's Holiday is an excellent family movie! It has the usual slapstick moments which are funny and sometimes inappropriate behaviour."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields": {
+            "watched": true,
+            "title": "Spider-Man 3",
+            "rating": 4,
+            "release_date": "2007-05-02",
+            "review": "Spider-Man 3 is a great action movie! It easily had the best action, not just because of the amount of villains, but because of the way they were choreographed. "
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {
+            "watched": true,
+            "title": "The Terminator",
+            "rating": 5,
+            "release_date": "1984-10-26",
+            "review": "The Terminator is sensational sci-fi thriller film! It has great plot and also the feel of the classic 80's action movie."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields": {
+            "watched": true,
+            "title": "Dragon Ball Z: Resurrection 'F'",
+            "rating": 5,
+            "release_date": "2015-04-18",
+            "review": "Dragon Ball Z: Resurrection 'F' is a marvelous Japanese animated movie! It has great design and a storyline with the element of surprise."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 5,
+        "fields": {
+            "watched": true,
+            "title": "Home Alone",
+            "rating": 5,
+            "release_date": "1990-11-10",
+            "review": "This is a good-natured, albeit unrealistic family film that both kids and adults will enjoy especially during the Christmas season. It has a funny plot and also some managable violance."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 6,
+        "fields": {
+            "watched": false,
+            "title": "Top Gun: Maverick",
+            "rating": 5,
+            "release_date": "2022-05-27",
+            "review": "This movie pictures the adventures of the top gun very nicely with quite great attraction ability, overall very good."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 7,
+        "fields": {
+            "watched": false,
+            "title": "Venom: Let There Be Carnage",
+            "rating": 3,
+            "release_date": "2021-11-17",
+            "review": "The relations between Eddie and Venom became very close after the first movie. In this one it introduces a new villain, namely Carnage. The sound effect of this film is great."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 8,
+        "fields": {
+            "watched": false,
+            "title": "Jurassic World Dominion",
+            "rating": 3,
+            "release_date": "2022-06-08",
+            "review": "For people that quite like gigantic animals, especially Jurassic Park enthusiast, this is a movie for you."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 9,
+        "fields": {
+            "watched": false,
+            "title": "The Hobbit",
+            "rating": 4,
+            "release_date": "2012-11-28",
+            "review": "This movie is quite nice! It's definitely no Lord of The Rings type of quality but it's still a pretty cool movie. Sure, it took it's time to try to tell the story, but in the end it's enjoyable."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 10,
+        "fields": {
+            "watched": true,
+            "title": "Thor: Love and Thunder",
+            "rating": 3,
+            "release_date": "2022-07-06",
+            "review": "This is the movie about Thor after the Endgame. Overall a good film, but to me it kind of feels empty in a way."
+        }
+    }
+    
+]

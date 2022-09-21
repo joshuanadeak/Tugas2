@@ -1,0 +1,53 @@
+<!--
+This is not my own code implementation (Based of last week Assignment 2)
+Implementasi yang saya pahami adalah dengan melakukan loop seperti biasa, pada Lab sebelumnya
+Tetapi, saya melihat ada teman saya yang mengimplement seperti ini, jadi saya berusaha coba ketik ulang untuk memahami yang dia kerjakan
+Dengan begitu, saya juga berusaha untuk mempelajari hal-hal yang belum pernah saya pelajari sebelumnya (terutama tentang css)
+Full credit goes to Daniel Christian Mandolang - 2106630006
+Tetapi karena implementasi sepertinya juga bagian penilaian, saya coba lampirkan implementasi yang saya bisa buat di tambahan.txt
+-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="title-container">
+    <h1 class="title">My Own Watchlist: PBP Assignment 3</h1>
+  </div>
+
+  <h4>Name: </h4>
+  <p>{{nama}}</p>
+
+  <h4>Student ID: </h4>
+  <p>{{NPM}}</p>
+
+  {% if watch_bigger %}
+  <p>Selamat, kamu sudah banyak menonton!</p>
+  {% else %}
+  <p>Wah, kamu masih sedikit menonton!</p>
+  {% endif %}
+
+  <table class="table">
+    <tr class="table-header-row">
+      <th class="table-header-cell">Watched</th>
+      <th class="table-header-cell">Title</th>
+      <th class="table-header-cell">Rating</th>
+      <th class="table-header-cell">Release Date</th>
+      <th class="table-header-cell">Review</th>
+    </tr>
+
+    {% comment %} Add the data below this line {% endcomment %}
+    
+    {% for data in list_watchlist %}
+      <tr class="table-row">
+        <th class="table-cell">{{ data.watched }}</th>
+        <th class="table-cell">{{ data.title }}</th>
+        <th class="table-cell">{{ data.rating }}</th>
+        <th class="table-cell">{{ data.release_date }}</th>
+        <th class="table-cell">{{ data.review }}</th>
+      </tr>
+    {% endfor %}
+
+  </table>
+
+{% endblock content %}
