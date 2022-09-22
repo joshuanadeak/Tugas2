@@ -1,7 +1,11 @@
 # Tugas 3: Pengimplementasian Data Delivery Menggunakan Django
 ---
 Tautan URLnya dapat diklik di link [berikut](https://tugas2pbpjoshuanadeak.herokuapp.com/katalog/).
-Untuk _design_, _all credits to_ Daniel Christian Mandolang. Saya melampirkan penerapan saya pribadi, tapi saya memakai yang ada pada program dia, karena bentuknya lebih bagus sekaligus mempelajari cara kerja CSS.
+Untuk _design_, _all credits to_ Daniel Christian Mandolang atas idenya. Saya melampirkan penerapan saya pribadi, tapi saya memakai yang ada pada program dia, karena bentuknya lebih bagus sekaligus mempelajari cara kerja CSS.
+Untuk link tugas 3 sebagai berikut:
+[JSON](https://tugas2pbpjoshuanadeak.herokuapp.com/mywatchlist/json/)
+[XML](https://tugas2pbpjoshuanadeak.herokuapp.com/mywatchlist/xml/)
+[HTML](https://tugas2pbpjoshuanadeak.herokuapp.com/mywatchlist/html/)
 
 ## Gambaran _JSON vs. XML vs. HTML_
 ---
