@@ -1,27 +1,143 @@
-# Tugas 2: Pengenalan Aplikasi dan MVT pada Django
+# Tugas 3: Pengimplementasian Data Delivery Menggunakan Django
 ---
 Tautan URLnya dapat diklik di link [berikut](https://tugas2pbpjoshuanadeak.herokuapp.com/katalog/).
 Untuk _design_, _all credits to_ Daniel Christian Mandolang. Saya melampirkan penerapan saya pribadi, tapi saya memakai yang ada pada program dia, karena bentuknya lebih bagus sekaligus mempelajari cara kerja CSS.
 
-## Bagan _Request-Response Client_
+## Gambaran _JSON vs. XML vs. HTML_
 ---
-![](../katalog/bagan.png?raw=true)
-Pertama-tama, _client_ mengirim suatu _request_ ke server, nantinya server akan meneruskan _request_ tersebut ke Django. Setelah sampai di Django, _request_ tersebut akan melakukan _parse_ URL yang diterima dan melakukan _routing_ berdasarkan _path_ URL ke _view function_ di file urls.py, di mana hal tersebut diproses ke views.py. Setelah itu, akan dilakukan proses _query_ ke database melalui model yang telah dibuat di models.py. Nantinya, HTML tersebut akan di-_render_ berdasarkan template yang ada pada template.html. Terakhir, hasil yang telah dirender tersebut akan "diberikan" ke views.py dan nantinya akan dikirim dan tampilkan ke _client_.
+![](../mywatchlist/image.png?raw=true)
+Pertama-tama, kita tentunya telah mengerjakan berbagai bentuk latihan maupun tugas yang berkaitan dengan ketiga hal ini. Ini dilakukan melalui pengerjaan dari Lab 2 dan juga pada Tugas 3 ini. Pengenalan berkaitan dengan _JSON, XML, HTML_ merupakan suatu hal yang sangat krusial untuk dipahami, sehingga kemampuan kita yang bersifat praktikal langsung pada pengerjaan tidak ketinggalan dari segi teoretisnya.
 
-## _Virtual Environment_
+## Perbedaan antara _JSON, XML,_ dan _HTML_
 ---
-### Mengapa kita menggunakan virtual environment?
-Suatu _Virtual environment_ merupakan sebuah _development environment_/infrastruktur _environment_ yang digunakan oleh framework, seperti pada kasus ini adalah Django, di mana fungsinya adalah menjaga konsistensi dari _dependency_ yang ada di proyek tersebut, hal ini dilakukan dengan memisahkan satu proyek dengan proyek lain. Tujuan dari hal tersebut adalah sehingga tidak terjadi konflik antarproyek yang bisa menimbulkan kerusakan data ataupun _error_, karena suatu project seringkali memiliki _dependency_ yang berbeda dengan proyek lain. Sehingga pada kasus ini, _virtual environment_ bisa mendukung proses pengembangan suatu produk/aplikasi, seperti _web_.
-### Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
-Ya, kita dapat membuat aplikasi web berbasis Django tanpa menggunakan _virtual environment_. Walaupun begitu, tentunya penerapan seperti itu tidak baik dan rawan terkena permasalahan. Alasannya adalah karena tanpa suatu _virtual environment_, berbagai _dependency_ suatu proyek akan diunduh secara global dan dengan begitu tentunya akan berpotensi menciptakan konflik antarproyek yang kita kerjakan.
+### _HTML_
+Dalam pengerjaan berbagai pemrograman _web_, pemahaman akan _HTML_ merupakan suatu hal yang sangat krusial untuk dipahami, karena _base_ dari pemrograman _web_ itu sendiri diawali oleh _HTML_ ini. HTML merupakan suatu akronim dari _Hypertext Markup Language_, di mana _HTML_ ini dipergunakan dalam penampilan tiap halaman _web_. Di dalam pemrograman _web_ terdapat berbagai bentuk elemen, baik itu statis maupun dinamis. Elemen-elemen statis misal, hyperlink, button, image dan juga elemen dinamis biasa berupa data dari database dapat ditampilkan pada halaman _HTML_. Dalam pembuatan halaman web dengan _HTML_, perlu digunakan _format tags_.
+Contoh _HTML_:
+```
+<tr>
+   <th>Item Name</th>
+   <th>Item Price</th>
+   <th>Item Stock</th>
+   <th>Rating</th>
+   <th>Description</th>
+   <th>Item URL</th>
+</tr>
+```
+### _XML_
+Kita telah mengenal _HTML_ pada bagian sebelumnya. Sekarang kita akan membahas lebih lanjut berkaitan dengan _XML_ dan juga _JSON_ pada bagian selanjutnya. _XML_ merupakan akronim dari _eXtensible Markup Language_. _XML_ ini memiliki fungsi di dalam pelaksanaan _data-delivery_, begitu juga dengan _JSON_. Namun, hal yang membedakan antara _XML_ dengan _JSON_ adalah formatnya yang cukup serupa dengan _HTML_. _XML_ menggunakan _tags_ yang memiliki format yang mirip dengan _HTML_, misal <produk>SumpitTerbang</produk>. Karena adanya format ini, nantinya data yang ditampung pun akan memiliki ukuran yang relatif lebih besar dibandingkan pada _JSON_.
+Contoh _XML_:
+```
+<django-objects version="1.0">
+    <object model="mywatchlist.mywatchlist" pk="1">
+        <field name="watched" type="BooleanField">True</field>
+        <field name="title" type="CharField">Mr. Bean's Holiday</field>
+        <field name="rating" type="IntegerField">5</field>
+        <field name="release_date" type="DateField">2007-03-24</field>
+        <field name="review" type="TextField">Mr Bean's Holiday is an excellent family movie! It has the usual slapstick moments which are funny and sometimes inappropriate behaviour.</field>
+    </object>
+```
+### _JSON_
+_JSON_ merupakan salah satu bentuk umum dalam pertukaran data atau _data-delivery_. _JSON_ itu sendiri merupakan akronim dari _JavaScript Object Notation_, di mana _JSON_ melakukan penampungan data dari _app_ yang bersangkutan dalam bentuk _key-value pair_. Secara format, data-data yang berbeda dipisah dengan karakter koma (,). Bila ditaksir berdasarkan besar _file_-nya, ukuran data pada _JSON_ lebih kecil dibandingkan ukuran data yang ditampung dalam _XML_.
+Contoh _JSON_:
+```
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Mr. Bean's Holiday",
+            "rating": 5,
+            "release_date": "2007-03-24",
+            "review": "Mr Bean's Holiday is an excellent family movie! It has the usual slapstick moments which are funny and sometimes inappropriate behaviour."
+        }
+    }
+]
+```
+Jadi, secara singkat perbedaannya adalah sebagai berikut:
+- Suatu _HTML_ dipergunakan dalam penampilan dokumen web pada suatu browser, sedangkan XML dan JSON digunakan untuk _data-delivery_.
+- Suatu file _HTML_ dan juga file _XML_ akan memiliki ukuran yang lebih besar daripada _JSON_ secara umum.
+- _XML_ dan _HTML_ bisa diakses menggunakan DOM, sementara _JSON_ diakses dengan key-value pair.
 
-## Implementasi
+## Mengapa diperlukan _data-delivery_ dalam pengimplementasian sebuah _platform_?
+Pada proses pembuatan suatu aplikasi yang pada kasus ini menggunakan suatu platform, sistem _data-delivery_ merupakan suatu hal yang sangat krusial untuk dapat dilakukan, karena melalui proses inilah dilaksanakan pertukaran data dengan server yang berkaitan. Jika seandainya tidak terdapat mekanisme ini maka nantinya data yang berasal dari _database_ tidak bisa ditampilkan secara nyata (_front-end_). Kerap dalam pembuatan suatu aplikasi terdapat data yang dinamis, yang berarti bahwa data ini dapat berubah dengan waktu karena terdapat _user_ yang mengganti data tersebut, baik itu melalui servernya maupung langsung secara interaktif di _app_ tersebut. Dengan konsep _data-delivery_ ini nantinya data terbaru itu dapat ditampilkan secara nyata di _app_ tersebut.
+
+## Implementasi yang saya lakukan
 ---
-### Membuat sebuah fungsi pada views.py
-Pertama-tama, dibuat suatu fungsi `show_katalog(request)` pada file `views.py`, sesuai instruksi yang diberikan. Fungsi ini nantinya akan menerima _request_ dari _client_ yang akan diacukan sebagai parameter, lalu akan dibentuk _query_ untuk meminta semua data dari `CatalogItem`. _Return_ dari fungsi ini adalah semua data yang didapat dari `katalog.html` dengan `context` yang sesuai.
-### Membuat sebuah routing
-Lalu, perlu dibentuk `urlpatterns` baru untuk `katalog` yang terdapat di file `urls.py`. Setelah itu, perlu dicantumkan semua _route_ yang dihubungkan ke fungsi `show_katalog(request)` pada `views.py`. Terakhir, semua _route_ tersebut harus juga ditaruh pada `urlpatterns` milik `urls.py` sehingga fungsinya dapat dijalankan.
-### Memetakan data yang didapatkan ke dalam HTML
-Sebelum lupa, lakukan terlebih dahulu _migration_ sehingga bisa dipetakan ke template.html, sehingga data yang akan diproses sama dengan databasenya, serta juga lakukan _loaddata_ pada file json-nya. Setelah itu, kita bisa lakukan _looping_ untuk membuat masing-masing data yang tersedia ke suatu bentuk tabel yang rapi. Pada kesempatan ini, saya kebetulan melihat-lihat ada milik teman saya, Daniel Christian Mandolang yang bentuknya bagus, sehingga saya mencoba meniru punyanya sekaligus mempelajari cara kerja CSS, karena saya belum pernah mempelajari CSS sebelumnya. Tetapi, saya juga melampirkan _logic_ penerapan saya juga pada file txt yang saya sediakan di folder, jika barangkali diperlukan.  (_All credits to Daniel for the great table design, if he sees this message, thanks!_)
+### Diawali dengan membuat proyek baru
+Pertama-tama, kita perlu membuat suatu proyek baru pada program yang telah dibuat pada tugas sebelumnya ini, ini dilakukan dengan menjalankan kode berikut:
+``` python manage.py startapp mywatchlist ```
+### Lalu, dibuat model data pada models.py
+```
+from django.db import models
+
+class CatalogItem(models.Model):
+    item_name = models.CharField(max_length=255)
+    item_price = models.BigIntegerField()
+    item_stock = models.IntegerField()
+    description = models.TextField()
+    rating = models.IntegerField()
+    item_url = models.URLField()
+```
+### Setelah itu, tambahkan data yang terdapat pada _fixtures_
+Contohnya dari hal ini seperti berikut:
+```
+{
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Mr. Bean's Holiday",
+            "rating": 5,
+            "release_date": "2007-03-24",
+            "review": "Mr Bean's Holiday is an excellent family movie! It has the usual slapstick moments which are funny and sometimes inappropriate behaviour."
+        }
+}
+```
+### Menambahkan beberapa hal pada views.py
+Ini dilakukan dengan menambah _show_json, show_html, dan show_xml_ seperti berikut:
+```
+from django.shortcuts import render
+from mywatchlist.models import MyWatchList
+from django.http import HttpResponse
+from django.core import serializers
+
+
+def show_json_watchlist(request):
+    data_json = MyWatchList.objects.all()
+    return HttpResponse(serializers.serialize("json", data_json), content_type="application/json")
+
+def show_xml_watchlist(request):
+    data_xml = MyWatchList.objects.all()
+    return HttpResponse(serializers.serialize("xml", data_xml), content_type="application/xml")
+
+def show_html_watchlist(request):
+    data_html = MyWatchList.objects.all()
+    count_watched = MyWatchList.objects.filter(watched = True).count()
+    count_not_watched = MyWatchList.objects.filter(watched = False).count()
+    if count_watched >= count_not_watched:
+        watch_bigger = True
+    elif count_not_watched > count_watched:
+        watch_bigger = False
+    context = {
+        'list_watchlist': data_html,
+        'nama': 'Joshua Mihai Daniel Nadeak',
+        'NPM': '2106635285',
+        'watch_bigger': watch_bigger,
+    }
+    return render(request, "mywatchlist.html", context)
+```
+### Melakukan migrasi data dan me-load data yang akan dipakai
+Ini dilakukan dengan beberapa kode berikut ini:
+```
+python manage.py makemigrations
+python manage.py migrate
+python manage.py loaddata initial_watchlist.json
+```
 ### Melakukan deployment ke Heroku
-Membuat file `Procfile` berisi _command_ yang harus dijalankan untuk melakukan build dan file `dpl.yml` berisi konfigurasi untuk deployment pada heroku. Nantinya kita hanya perlu membuat app pada heroku, menambah secrets pada github, dan melakukan _deploy_-nya secara otomatis.
+Menambahkan kode pada file `Procfile` berisi _command_ yang harus dijalankan untuk melakukan build yang berkaitan dengan deployment pada heroku. Nantinya kita hanya perlu membuat app pada heroku, menambah secrets pada github, dan melakukan _deploy_-nya secara otomatis.
+
+## _Checking Routes Using Postman_
+### _HTML_
+### _JSON_
+### _XML_
