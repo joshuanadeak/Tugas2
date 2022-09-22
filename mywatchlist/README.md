@@ -6,6 +6,7 @@ Untuk _design_, _all credits to_ Daniel Christian Mandolang. Saya melampirkan pe
 ## Gambaran _JSON vs. XML vs. HTML_
 ---
 ![](../mywatchlist/image.png?raw=true)
+---
 Pertama-tama, kita tentunya telah mengerjakan berbagai bentuk latihan maupun tugas yang berkaitan dengan ketiga hal ini. Ini dilakukan melalui pengerjaan dari Lab 2 dan juga pada Tugas 3 ini. Pengenalan berkaitan dengan _JSON, XML, HTML_ merupakan suatu hal yang sangat krusial untuk dipahami, sehingga kemampuan kita yang bersifat praktikal langsung pada pengerjaan tidak ketinggalan dari segi teoretisnya.
 
 ## Perbedaan antara _JSON, XML,_ dan _HTML_
@@ -135,9 +136,15 @@ python manage.py migrate
 python manage.py loaddata initial_watchlist.json
 ```
 ### Melakukan deployment ke Heroku
-Menambahkan kode pada file `Procfile` berisi _command_ yang harus dijalankan untuk melakukan build yang berkaitan dengan deployment pada heroku. Nantinya kita hanya perlu membuat app pada heroku, menambah secrets pada github, dan melakukan _deploy_-nya secara otomatis.
+Menambahkan kode pada file `Procfile` berisi _command_ yang harus dijalankan untuk melakukan build dan yang berkaitan dengan dpl.yml yang akan melakukan deployment pada heroku. Nantinya kita hanya perlu membuat app pada heroku, menambah secrets pada github, dan melakukan _deploy_-nya secara otomatis.
 
 ## _Checking Routes Using Postman_
 ### _HTML_
+![](../mywatchlist/html.png?raw=true)
+---
 ### _JSON_
+![](../mywatchlist/json.png?raw=true)
+---
 ### _XML_
+![](../mywatchlist/xml.png?raw=true)
+---
