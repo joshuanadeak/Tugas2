@@ -42,12 +42,13 @@
             {% endif %}
         </th>
         <th class="table-cell">
-          <a class="button" href="{% url 'todolist:update_todolist' data.id %}">
-            Update Task
-          </a>
+          <a class="button" href="{% url 'todolist:update_todolist' id=data.pk %}">
+              Update Task
+            </a>
+          </form>
         </th>
         <th class="table-cell">
-          <a class="button" href="{% url 'todolist:delete_todolist' data.id %}">
+          <a class="button" href="{% url 'todolist:delete_todolist' id=data.pk %}">
             Delete Task
           </a>
         </th>

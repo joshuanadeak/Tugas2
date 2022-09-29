@@ -1,17 +1,14 @@
-# Tugas 3: Pengimplementasian Data Delivery Menggunakan Django
+# Tugas 4: Pengimplementasian Form dan Autentikasi Menggunakan Django
 ---
-Tautan URLnya dapat diklik di link [berikut](https://tugas2pbpjoshuanadeak.herokuapp.com/katalog/).
-Untuk _design_, _all credits to_ Daniel Christian Mandolang atas idenya. Saya melampirkan penerapan saya pribadi, tapi saya memakai yang ada pada program dia, karena bentuknya lebih bagus sekaligus mempelajari cara kerja CSS.
-Untuk link tugas 3 sebagai berikut:
-[JSON](https://tugas2pbpjoshuanadeak.herokuapp.com/mywatchlist/json/)
-[XML](https://tugas2pbpjoshuanadeak.herokuapp.com/mywatchlist/xml/)
-[HTML](https://tugas2pbpjoshuanadeak.herokuapp.com/mywatchlist/html/)
+Tautan URLnya dapat diklik di link [berikut](https://tugas2pbpjoshuanadeak.herokuapp.com/todolist/).
 
-## Gambaran _JSON vs. XML vs. HTML_
+## Apakah kegunaan {% csrf_token %} pada elemen <form>
 ---
 ![](../mywatchlist/image.png?raw=true)
 ---
 Pertama-tama, kita tentunya telah mengerjakan berbagai bentuk latihan maupun tugas yang berkaitan dengan ketiga hal ini. Ini dilakukan melalui pengerjaan dari Lab 2 dan juga pada Tugas 3 ini. Pengenalan berkaitan dengan _JSON, XML, HTML_ merupakan suatu hal yang sangat krusial untuk dipahami, sehingga kemampuan kita yang bersifat praktikal langsung pada pengerjaan tidak ketinggalan dari segi teoretisnya.
+
+### Apa yang terjadi apabila tidak ada potongan kode tersebut tidak ada pada elemen <form>?
 
 ## Perbedaan antara _JSON, XML,_ dan _HTML_
 ---

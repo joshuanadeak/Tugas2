@@ -1,3 +1,5 @@
+<!-- Acknowledgement: Inspired by Daniel Christian Mandolang's HTML-->
+
 {% extends 'base.html' %}
 
 {% block meta %}
@@ -13,12 +15,28 @@
         <form method="POST">
             {% csrf_token %}
             <table>
-                {{ form.as_table }}
                 <tr>
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Create Task" /></td>
+                    <td>Title </td>
+                    <td>
+                        <input type="text" name="title" placeholder="Title" class="form-control rounded-md w-full">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Description </td>
+                    <td>
+                        <textarea type="description" name="description" placeholder="Description" class="form-control rounded-md w-full"> </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Date </td>
+                    <td>
+                        <input type="date" name="date" placeholder="Date" class="form-control rounded-md w-full">
+                    </td>
                 </tr>
             </table>
+            <button class="submit mt-6 px-4 py-2 bg-gradient-to-r from-green-600 to-orange-600 text-white rounded-md">
+                Save
+            </button>
         </form>
 
     {% if messages %}

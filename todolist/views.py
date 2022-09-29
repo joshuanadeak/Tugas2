@@ -60,8 +60,8 @@ class TaskForm(ModelForm):
 
 @login_required(login_url='/todolist/login/')
 def create_todolist(request):
+    form = TaskForm(request.POST)
     if request.method == "POST":
-        form = TaskForm(request.POST)
         if form.is_valid():
             date = form.cleaned_data["date"]
             title = form.cleaned_data["title"]
@@ -71,29 +71,26 @@ def create_todolist(request):
             task.save()
             messages.success(request, "Your Task Has Been Saved!")
             return redirect("todolist:show_todolist")
-    form = TaskForm()
     context = {"form": form}
     return render(request, "create_task.html", context)
 
 @login_required(login_url='/todolist/login/')
 def delete_todolist(request, id):
-    if request.method == "POST":
-        task = Task.objects.filter(pk = id, user = request.user).first()
-        if task:
-            task.delete()
-            messages.success(request, "Deleted Successfully!")
-        else:
-            messages.error(request, "An Error Has Occurred While Deleting!")
+    task = Task.objects.get(pk = id, user = request.user)
+    if task:
+        task.delete()
+        messages.success(request, "Deleted Successfully!")
+    else:
+        messages.error(request, "An Error Has Occurred While Deleting!")
     return redirect("todolist:show_todolist")
 
 @login_required(login_url='/todolist/login/')
 def update_todolist(request, id):
-    if request.method == "POST":
-        task = Task.objects.filter(pk = id, user = request.user).first()
-        if task:
-            task.is_finished = not task.is_finished
-            task.save()
-            messages.success(request, "Updated Successfully!")
-        else:
-            messages.error(request, "An Error Has Occurred While Updating!")
+    task = Task.objects.get(pk = id, user = request.user)
+    if task:
+        task.is_finished = not task.is_finished
+        task.save()
+        messages.success(request, "Updated Successfully!")
+    else:
+        messages.error(request, "An Error Has Occurred While Updating!")
     return redirect("todolist:show_todolist")
