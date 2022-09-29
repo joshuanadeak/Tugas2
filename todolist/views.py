@@ -17,7 +17,7 @@ from todolist.models import Task
 # Isi Views
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
-    data_todolist = Task.objects.filter(user=request.user).order_by('is_finished', 'date')
+    data_todolist = Task.objects.filter(user=request.user).order_by('date')
     context = {
         'list_todolist': data_todolist,
         'nama': 'Joshua Mihai Daniel Nadeak',

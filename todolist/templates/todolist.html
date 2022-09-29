@@ -6,7 +6,7 @@
   </div>
 
 <p>
-    Greetings, {{ user.get_username }}!|
+    Greetings, {{ user.get_username }}!
 </p>
 
 <button><a href="{% url 'todolist:create_todolist' %}">Create New Task</a></button>
@@ -19,7 +19,8 @@
       <th class="table-header-cell">Title</th>
       <th class="table-header-cell">Description</th>
       <th class="table-header-cell">Is Finished</th>
-      <th class="table-header-cell">Delete</th>
+      <th class="table-header-cell">Button Is Finished</th>
+      <th class="table-header-cell">Button Delete</th>
     </tr>
 
     {% comment %} Add the data below this line {% endcomment %}
@@ -30,17 +31,25 @@
         <th class="table-cell">{{ data.title }}</th>
         <th class="table-cell">{{ data.description }}</th>
         <th class="table-cell">
-            {{ data.is_finished }} |
-            <form action="{% url 'todolist:update_todolist' item.id %}" method="POST">
-                {% csrf_token %}
-                <button>Update Task</button>
-            </form>
+          {% if data.is_finished %}
+            <p>
+              Yes, It's Finished
+            </p>
+            {% else %}
+            <p>
+              No, It's Not Finished
+            </p>
+            {% endif %}
         </th>
         <th class="table-cell">
-            <form action="{% url 'todolist:delete_todolist' item.id %}" method="POST">
-                {% csrf_token %}
-                <button>Delete Task</button>
-            </form>
+          <a class="button" href="{% url 'todolist:update_todolist' data.id %}">
+            Update Task
+          </a>
+        </th>
+        <th class="table-cell">
+          <a class="button" href="{% url 'todolist:delete_todolist' data.id %}">
+            Delete Task
+          </a>
         </th>
       </tr>
     {% endfor %}
