@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="title-container">
+    <h1 class="title">My Own TodoList: PBP Assignment 4</h1>
+  </div>
+
+<p>
+    Greetings, {{ user.get_username }}!|
+</p>
+
+<button><a href="{% url 'todolist:create_todolist' %}">Create New Task</a></button>
+
+<br></br>
+
+  <table class="table">
+    <tr class="table-header-row">
+      <th class="table-header-cell">Date</th>
+      <th class="table-header-cell">Title</th>
+      <th class="table-header-cell">Description</th>
+      <th class="table-header-cell">Is Finished</th>
+      <th class="table-header-cell">Delete</th>
+    </tr>
+
+    {% comment %} Add the data below this line {% endcomment %}
+    
+    {% for data in list_todolist %}
+      <tr class="table-row">
+        <th class="table-cell">{{ data.date }}</th>
+        <th class="table-cell">{{ data.title }}</th>
+        <th class="table-cell">{{ data.description }}</th>
+        <th class="table-cell">
+            {{ data.is_finished }} |
+            <form action="{% url 'todolist:update_todolist' item.id %}" method="POST">
+                {% csrf_token %}
+                <button>Update Task</button>
+            </form>
+        </th>
+        <th class="table-cell">
+            <form action="{% url 'todolist:delete_todolist' item.id %}" method="POST">
+                {% csrf_token %}
+                <button>Delete Task</button>
+            </form>
+        </th>
+      </tr>
+    {% endfor %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<button><a href="{% url 'todolist:logout' %}">Log Out</a></button>
+
+{% endblock content %}
