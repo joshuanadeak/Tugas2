@@ -6,13 +6,14 @@ Tautan URLnya dapat diklik di link [berikut](https://tugas2pbpjoshuanadeak.herok
 2. Username: ayamgoreng2       Pass: testodesu2020
 
 ## Apakah kegunaan {% csrf_token %} pada elemen <form>
+### Dan, apa yang terjadi apabila tidak ada potongan kode tersebut tidak ada pada elemen <form>?
 ---
 ![](../todolist/csrf.png?raw=true)
 ---
 Sebelum masuk ke dalam pemahaman akan kegunaan dari CSRF, tentunya perlu dipahami terlebih dahulu definisi dari CSRF itu sendiri. CSRF atau Cross-Site Request Forgery adalah suatu attack yang dilakukan terhadap seseorang yang sudah terautentikasi ke suatu website, di mana pengguna tersebut akan dibuat sang hacker melakukan hal yang ia tidak maksud (misalnya, mentransfer dana ke sang hacker untuk keuntungan pribadinya). Hal ini dapat terjadi karena _session user_ pada suatu _web_ yang terkait masih aktif, sehingga dibuat seolah-olah user benar-benar melakukan _request_ tersebut. Pada server yang tidak menggunakan proteksi CSRF, apabila user di-_click_ URL tersebut, akan langsung mentransfer ke target. Di sinilah sebenarnya fungsi dari CRS token terlihat, yakni untuk keamanan dari hal tersebut. CSRF token bekerja dengan server mengirim token tersebut ke client, dan client harus mengirim kembali token tersebut sebagai bagian dari request selanjutnya. Apabila token tidak ada atau tidak sesuai dengan apa yang dimiliki server, maka request tersebut akan di-_reject_, sehingga keamanan dari hal tersebut bisa terjamin.
 
 
-### Apa yang terjadi apabila tidak ada potongan kode tersebut tidak ada pada elemen <form>?
+
 
 ## Apakah kita dapat membuat elemen <form> secara manual (tanpa menggunakan generator seperti {{ form.as_table }})?
 ---
