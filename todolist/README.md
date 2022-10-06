@@ -160,3 +160,158 @@ python manage.py migrate
 Menambahkan kode pada file `Procfile` berisi _command_ yang harus dijalankan untuk melakukan build dan yang berkaitan dengan dpl.yml yang akan melakukan deployment pada heroku. Nantinya kita hanya perlu membuat app pada heroku, menambah secrets pada github, dan melakukan _deploy_-nya secara otomatis.
     
 ### Buatlah 2 buah dummy yang sesuai dengan masing-masing memiliki 3 buah task, sesuai dengan akun yang sudah dilampirkan di atas
+
+---
+---
+
+# Tugas 5: Web Design Using HTML, CSS, and CSS Framework
+---
+Tautan URLnya dapat diklik di link [berikut](https://tugas2pbpjoshuanadeak.herokuapp.com/todolist/).
+### Akun Dummy yang Telah Dibuat
+1. Username: ayamgoreng1       Pass: testodesu2020
+2. Username: ayamgoreng2       Pass: testodesu2020
+
+## Apa perbedaan dari Inline, Internal, dan _External_ CSS?
+### Apa saja kelebihan dan kekurangan dari masing-masing style?
+---
+![](../todolist/css.png?raw=true)
+---
+Untuk lebih memahami perbedaan antara Inline, Internal, dan Eksternal CSS perlu ditinjau langsung berdasarkan definisinya. Penjelasannya adalah sebagai berikut:
+### Inline
+Inline CSS adalah salah satu cara styling pada CSS yang digunakan langsung untuk suatu tag html secara spesifik. Atribut ```<style>``` digunakan untuk memberikan style ke suatu tag html. Contohnya adalah sebagai berikut:
+```
+<!DOCTYPE html>
+<html>
+<body style="background-color:black;">
+ 
+<h1 style="color:white;padding:30px;">Hostinger Tutorials</h1>
+<p style="color:white;">Something usefull here.</p>
+ 
+</body>
+</html>
+```
+Kelebihannya: Dalam melakukan perbaikan relatif cepat dan permintaan HTTP yang relatif kecil.
+Kekurangannya: Hanya dapat mengatur sebuah tag, akan sangat melelahkan untuk diterapkan pada tiap tag di sebuah laman.
+### Internal
+Internal CSS adalah salah satu cara styling CSS yang ditaruh di dalam bagian ```<head>``` pada sebuah halaman. Dalam kasus ini, Class dan ID dapat digunakan untuk merujuk kode pada CSS, namun hanya akan aktif pada halaman tersebut. Contohnya adalah sebagai berikut:
+```
+<head>
+  <style type="text/css">
+    p {color:white; font-size: 10px;}
+    .center {display: block; margin: 0 auto;}
+    #button-go, #button-back {border: solid 1px black;}
+  </style>
+</head>
+```
+Kelebihannya: Berbagai kelas dan ID dapat dipergunakan oleh _stylesheet_ yang ada di dalamnya dan untuk perubahan satu halaman, tidak perlu buat beberapa file jadinya.
+Kekurangannya: Tidak efisien untuk mengubah style css yang ingin sama diterapkan pada beberapa halaman dan meningkatkan waktu pada saat akses web.
+### Eksternal
+Eksternal CSS adalah salah satu cara styling CSS yang ditaruh pada file yang terpisah dengan file HTMLnya. Nantinya file dari CSSnya ini akan dilink di dalam file HTML pada bagian ```<head>``` untuk bisa digunakan stylenya. Contohnya adalah sebagai berikut:
+```
+Pada HTML:
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+Pada CSS:
+.xleftcol {
+   float: left;
+   width: 33%;
+   background:#809900;
+}
+.xmiddlecol {
+   float: left;
+   width: 34%;
+   background:#eff2df;
+}
+```
+Kelebihannya: Dalam satu file CSS bisa dipergunakan untuk berbagai halaman HTML, waktu akses ke website lebih cepat dari Internal, dan ukuran file HTML lebih kecil.
+Kekurangannya: Halaman tidak akan tampil sempurna bila file CSS belum selesai dipanggil.
+## Jelaskan tag HTML5 yang kamu ketahui!
+---
+```
+<a> = Memberikan definisi hyperlink
+<b> = Memberikan tampilaan text dalam bentuk bold
+<body> = Memberikan definisi Body dokumen
+<br> = Menghasilkan sebuah line break
+<button> = Membuat sebuah tombol yang bisa dipencet
+<div> = Menjelaskan sebuah divisi atau bagian di sebuah dokumen
+<form> = Mendefinisikan sebuah form HTML untuk input user
+<head> = Mendefiniskan bagian head dari sebuah dokumen yang mengandung informasi mengenai dokumennya seperti judul/title
+<h1> - <h6> = Mendefinisikan Heading/judul pada HTML
+<input> = Mendefinisikan input control
+<label> = Mendefinisikan label untuk <input> control
+<li> = Mendefinisikan list item
+<meta> = Menyajikan metadata terstruktur mengenai kontek dokumennya
+<p> = Mendefinisikan sebuah paragraf
+<span> = Mendefinisikan sebuah inline bagian tanpa style di sebuah dokumen
+<style> = Memasukkan informasi style (Biasanya CSS) ke dalam Head sebuah dokumen
+<table> = Mendefiniskan sebuah tabel data
+<td> = Mendefinisikan sebuah cell di dalam tabel
+<textarea> = Tempat user dapat memasukkan text (multi line)
+<th> = Mendefinisikan header cell dalam sebuah tabel
+<title> = Mendefinisikan judul dari sebuah dokumen
+<tr> = Mendefinisikan sebuah baris cell di dalam tabel
+<ul> = Mendefinisikan list tak berurut
+```
+
+## Jelaskan tipe-tipe CSS selector yang kamu ketahui!
+---
+1. Element Selector, ini menggunakan tag HTML sebagai selector untuk mengubah properti yang ada di dalam tag tersebut.
+2. ID Selektor, ini menggunakan ID pada tag HTML sebagai selector-nya (ID harus unik). Pada CSS-nya, menggunakan format #id.
+3. Class Selector, ini menggunakan class pada tag HTML sebagai selector-nya. Pada CSS-nya, menggunakan format .class.
+4. Selector, secara umum ini mengatur semua elemen yang ada di dokumen. Selector ini juga bisa seluruh elemen di dalam sebuah elemen lainnya.
+
+## Implementasi yang saya lakukan
+---
+### Melakukan _customization_ pada bagian HTML yang telah dibuat pada Tugas 4, di mana digunakan CSS atau frameworknya seperti Bootstrap
+Pada kesempatan kali ini, saya memiliki untuk menggunakan Bootstrap sebagai CSS framework saya dalam pembuatan tugas kali ini. Ini dapat saya lakukan dengan menambahkan link bootstrap pada head yang ada di ```templates/base.html```, seperti berikut (saya juga menambahkan 2 scripts lagi pada bagian bodynya untuk keperluan aplikasi saya):
+```
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  {% block meta %}
+  {% endblock meta %}
+</head>
+
+<body>
+  {% block content %}
+  {% endblock content %}
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+    crossorigin="anonymous"></script>
+</body>
+```
+
+### Mengubah implementasi dari HTML pada file yang ada di ```todolist/templates```
+Ini saya lakukan pada masing-masing file, yakni ```create_task.html```, ```login.html```, ```register.html```, ```todolist.html```.
+---
+#### ```create_task.html```
+Pada bagian ```create_task.html```, saya melakukan mengimport font dan melakukan styling. Saya juga mengubah tempate ```{{form.as_table}}``` dengan membuat fungsi-fungsi masing-masing secara manual. Setelah itu saya memasukkan ke dalam suatu container dan menaruhnya pada _center_. Karena di bootstrap terdapat beberapa template bentuk, seperti _button_, yang bisa diubah, saya mengutilisasi hal tersebut.
+#### ```register.html```
+Pada dasar konsepnya sama dengan ```create_task.html```, saya juga melakukan styling dan mengimport font. Saya mengubah template ```{{form.as_table}}``` dengan membuat fungsi-fungsi masing-masing secara manual. Setelah itu saya memasukkan ke dalam suatu container dan menaruhnya pada _center_. Pada bagian ini, saya mengimplementasi button secara manual. (Hal ini dengan bantuan dari GSGS, yakni melalui video Youtube yang telah saya pelajari, Coding Nepal Video https://www.youtube.com/watch?v=eeHqZeJ9Vqc)
+#### ```login.html```
+Tidak jauh beda juga dari register, saya juga melakukan styling dan mengimport font. Setelah itu saya memasukkan ke dalam suatu container dan menaruhnya pada _center_. Pada bagian ini, saya mengimplementasi button secara manual. (Hal ini dengan bantuan dari GSGS, yakni melalui video Youtube yang telah saya pelajari, Coding Nepal Video https://www.youtube.com/watch?v=eeHqZeJ9Vqc)
+#### ```todolist.html```
+Pada bagian todolist, saya juga melakukan implementasi yang sama, tetapi pada bagian ini saya terinspirasi dari pembuatan Rendy Arya Kemal untuk cara pembuatan _card_-nya sehingga saya juga bisa menyelesaikannya dengan cukup baik. Saya mengubah yang dari tadinya berbentuk tabel yang cetak langsung, menjadi yang bentuknya kartu, sehingga jauh lebih bagus secara tampilan, serta lebih interaktif dengan user dan sedap dipandang, ketimbang sebelumnya.
+
+### Mengubah satu fungsi pada todolist/views.py
+Saya melakukan ini untuk bisa kembali memasukkan data dari ```list_todolist``` yang saya implementasikan, yang tadinya dapat melayani yang berbentuk tabel cetak langsung, menjadi yang bentuknya kartu.
+
+### Membuat aplikasi web tersebut menjadi responsif
+Karena yang saya pakai adalah _framework_ Bootstrap versi 5.2 dalam aplikasi ini, sudah terdapat _media query_ yang berlandaskan _breakpoint-breakpoint_ yang telah disediakan oleh Bootstrap langsung. Juga, sudah terdapat kelas _grid_ dan _container_ yang memanfaatkan _breakpoint-breakpoint_ ini sehingga bentuknya dapat menjadi responsif dengan penyesuaian _breakpoint_-nya.
+Maka dari itu nantinya halamannya akan responsif dengan melakukan pembungkusan akan elemen-elemen HTML di dalam _grid_ juga _container_ jika ada. Dan juga, ukuran beberapa elemennya juga akan menyesuaikan dengan ukuran halamannya untuk membantu proses responsif tersebut.
+
+### Melakukan deployment ke Heroku
+Menambahkan kode pada file `Procfile` berisi _command_ yang harus dijalankan untuk melakukan build dan yang berkaitan dengan dpl.yml yang akan melakukan deployment pada heroku. Nantinya kita hanya perlu membuat app pada heroku, menambah secrets pada github, dan melakukan _deploy_-nya secara otomatis.
+    
+### Buatlah 2 buah dummy yang sesuai dengan masing-masing memiliki 3 buah task
+
+---
+---

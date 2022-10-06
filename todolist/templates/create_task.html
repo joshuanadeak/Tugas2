@@ -1,5 +1,3 @@
-<!-- Acknowledgement: Inspired by Daniel Christian Mandolang's HTML-->
-
 {% extends 'base.html' %}
 
 {% block meta %}
@@ -7,38 +5,63 @@
 {% endblock meta %}
 
 {% block content %}
-
-<div class="create_task">
-
-    <h1>Create TodoList Now</h1>
-
-        <form method="POST">
-            {% csrf_token %}
-            <table>
-                <tr>
-                    <td>Title </td>
-                    <td>
-                        <input type="text" name="title" placeholder="Title" class="form-control rounded-md w-full">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Description </td>
-                    <td>
-                        <textarea type="description" name="description" placeholder="Description" class="form-control rounded-md w-full"> </textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Date </td>
-                    <td>
-                        <input type="date" name="date" placeholder="Date" class="form-control rounded-md w-full">
-                    </td>
-                </tr>
-            </table>
-            <button class="submit mt-6 px-4 py-2 bg-gradient-to-r from-green-600 to-orange-600 text-white rounded-md">
-                Save
-            </button>
-        </form>
-
+<html lang="en" dir="ltr">
+    <head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg,#2980b9, #f7501e);
+      height: 100vh;
+      overflow: hidden;
+    }
+    form {
+        margin: auto;
+        width: 75%;
+        padding: 1em;
+        border: 2px solid rgb(87, 73, 73);
+        border-radius: 1em;
+        font-size: 15px;
+    }
+    </style>
+        <meta charset="utf-8">
+        <title>Login</title>
+    </head>
+    <body>
+        <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+            <form method="POST" class="form-floating">
+                {% csrf_token %}
+                <div class = "txt_field">
+                    <h1 style="text-align:center;">Creating Task for TodoList</h1>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" name="title" placeholder="Title" class="form-control rounded-md w-full">
+                    <span></span>
+                    <label>Title</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea type="description" name="description" placeholder="Description" class="form-control rounded-md w-full"> </textarea>
+                    <span></span>
+                    <label>Description</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" name="date" placeholder="Date" class="form-control rounded-md w-full">
+                    <span></span>
+                    <label>Date</label>
+                </div>
+                <div class="row d-flex justify-content-center text-center">
+                    <input type="submit" value="Save" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </body>
     {% if messages %}
         <ul class = "messages">
             {% for message in messages %}

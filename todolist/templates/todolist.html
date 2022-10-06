@@ -1,68 +1,76 @@
+<!--Bagian Pembuatan Kartu ToDoList ini diinspirasi oleh pembuatan yang dilakukan oleh Rendy Arya Kemal-->
+
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="title-container">
-    <h1 class="title">My Own TodoList: PBP Assignment 4</h1>
-  </div>
 
-<p>
-    Greetings, {{ user.get_username }}!
-</p>
-
-<button><a href="{% url 'todolist:create_todolist' %}">Create New Task</a></button>
-
-<br></br>
-
-  <table class="table">
-    <tr class="table-header-row">
-      <th class="table-header-cell">Date</th>
-      <th class="table-header-cell">Title</th>
-      <th class="table-header-cell">Description</th>
-      <th class="table-header-cell">Is Finished</th>
-      <th class="table-header-cell">Button Is Finished</th>
-      <th class="table-header-cell">Button Delete</th>
-    </tr>
-
-    {% comment %} Add the data below this line {% endcomment %}
+<html lang="en" dir="ltr">
+    <head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg,#2980b9, #f7501e);
+      height: 100vh;
+      overflow: hidden;
+    }
     
-    {% for data in list_todolist %}
-      <tr class="table-row">
-        <th class="table-cell">{{ data.date }}</th>
-        <th class="table-cell">{{ data.title }}</th>
-        <th class="table-cell">{{ data.description }}</th>
-        <th class="table-cell">
-          {% if data.is_finished %}
-            <p>
-              Yes, It's Finished
-            </p>
-            {% else %}
-            <p>
-              No, It's Not Finished
-            </p>
-            {% endif %}
-        </th>
-        <th class="table-cell">
-          <a class="button" href="{% url 'todolist:update_todolist' id=data.pk %}">
-              Update Task
-            </a>
-          </form>
-        </th>
-        <th class="table-cell">
-          <a class="button" href="{% url 'todolist:delete_todolist' id=data.pk %}">
-            Delete Task
-          </a>
-        </th>
-      </tr>
-    {% endfor %}
+    </style>
+        <meta charset="utf-8">
+        <title>My Own TodoList</title>
+    </head>
+    <body>
+      <nav class="navbar" style="background-color: #9e8d5d;">
+        <div class="title">
+          <h1 class="title" style="color:white;">My Own TodoList: PBP Assignment 4</h1>
+        </div>
+        <button><a class="btn btn-primary" href="{% url 'todolist:logout' %}">Log Out</a></button>
+      </nav>
+      <br></br>
+    <p style="color:white;">
+        Greetings, {{ user.get_username }}!
+    </p>
 
-{% if messages %}
-<ul class="messages">
+    <button><a class="btn btn-danger" href="{% url 'todolist:create_todolist' %}">Create New Task</a></button>
+
+    <br></br>
+    {% if messages %}
+  <ul class="alert alert-info flex-col text-left text-info-content">
     {% for message in messages %}
     <li>{{ message }}</li>
     {% endfor %}
-</ul>
-{% endif %}
+  </ul>
+  {% endif %}
 
-<button><a href="{% url 'todolist:logout' %}">Log Out</a></button>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {% for data in list_todolist %}
+    <div class="scale-100 hover:scale-105 transition card bg-neutral text-neutral-content">
+      <div class="card-body items-center text-center">
+        <h2 class="card-title">{{ todo.title }}</h2>
+        <span>{{ data.date }} | {{ data.is_finished | yesno:"Finished,Not Finished" }}</span>
+        <p>{{ data.description }}<p>
+        
+        <div class="card-actions justify-end">
+          <form action="{% url 'todolist:update_todolist' id=data.pk %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-primary">Toggle Finish</button>
+          </form>
+          <form action="{% url 'todolist:delete_todolist' id=data.pk %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 
+</div>
 {% endblock content %}

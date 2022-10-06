@@ -13,6 +13,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from todolist.models import Task
+from django import forms
 
 # Isi Views
 @login_required(login_url='/todolist/login/')
@@ -53,14 +54,9 @@ def logout_user(request):
     logout(request)
     return redirect("todolist:login")
 
-class TaskForm(ModelForm):
-    class Meta:
-        model = Task
-        fields = ['date', 'title', 'description']
-
 @login_required(login_url='/todolist/login/')
 def create_todolist(request):
-    form = TaskForm(request.POST)
+    form = NewForm(request.POST)
     if request.method == "POST":
         if form.is_valid():
             date = form.cleaned_data["date"]
@@ -71,6 +67,7 @@ def create_todolist(request):
             task.save()
             messages.success(request, "Your Task Has Been Saved!")
             return redirect("todolist:show_todolist")
+    form = NewForm();
     context = {"form": form}
     return render(request, "create_task.html", context)
 
@@ -94,3 +91,8 @@ def update_todolist(request, id):
     else:
         messages.error(request, "An Error Has Occurred While Updating!")
     return redirect("todolist:show_todolist")
+
+class NewForm(forms.Form):
+    date = forms.DateField(label = "Date")
+    title = forms.CharField(label="Title")
+    description = forms.CharField(label="Description", widget=forms.Textarea(attrs={"cols": ""}))
