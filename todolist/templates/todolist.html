@@ -11,15 +11,16 @@
     *{
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
       font-family: "Poppins", sans-serif;
     }
     body{
       margin: 0;
       padding: 0;
       background: linear-gradient(120deg,#2980b9, #f7501e);
-      height: 100vh;
-      overflow: hidden;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
     }
     
     </style>
@@ -29,7 +30,7 @@
     <body>
       <nav class="navbar" style="background-color: #9e8d5d;">
         <div class="title">
-          <h1 class="title" style="color:white;">My Own TodoList: PBP Assignment 4</h1>
+          <h1 class="title" style="color:white;">My Own TodoList: PBP Assignment 4-6</h1>
         </div>
         <button><a class="btn btn-primary" href="{% url 'todolist:logout' %}">Log Out</a></button>
       </nav>
@@ -49,13 +50,13 @@
   </ul>
   {% endif %}
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for data in list_todolist %}
-    <div class="scale-100 hover:scale-105 transition card bg-neutral text-neutral-content">
+    <div class="card bg-neutral text-neutral-content">
       <div class="card-body items-center text-center">
-        <h2 class="card-title">{{ todo.title }}</h2>
-        <span>{{ data.date }} | {{ data.is_finished | yesno:"Finished,Not Finished" }}</span>
-        <p>{{ data.description }}<p>
+        <h2 class="card-title">{{ data.title }}</h2>
+        <h6 class="card-subtitle mb-2 text-muted">{{ data.date }} | {{ data.is_finished | yesno:"Finished,Not Finished" }}</h6>
+        <p class="card-text">{{ data.description }}<p>
         
         <div class="card-actions justify-end">
           <form action="{% url 'todolist:update_todolist' id=data.pk %}" method="POST">
@@ -72,5 +73,7 @@
     {% endfor %}
   </div>
 
-</div>
+  <script type="text/javascript">
+    
+  </script>
 {% endblock content %}
