@@ -14,6 +14,8 @@ from django.urls import reverse
 from django.shortcuts import render
 from todolist.models import Task
 from django import forms
+from django.http.response import HttpResponse
+from django.core import serializers
 
 # Isi Views
 @login_required(login_url='/todolist/login/')
@@ -50,6 +52,7 @@ def login_user(request):
     context = {}
     return render(request, 'login.html', context)
 
+@login_required(login_url="/todolist/login")
 def logout_user(request):
     logout(request)
     return redirect("todolist:login")
@@ -96,3 +99,28 @@ class NewForm(forms.Form):
     date = forms.DateField(label = "Date")
     title = forms.CharField(label="Title")
     description = forms.CharField(label="Description", widget=forms.Textarea(attrs={"cols": ""}))
+
+@login_required(login_url="/todolist/login")
+def get_todo_json(request):
+    todos = Task.objects.filter(user=request.user).order_by("data").all()
+    return HttpResponse(
+        serializers.serialize("json", todos), content_type="application/json"
+    )
+
+@login_required(login_url="/todolist/login")
+def add_todo_json(request):
+    if request.method == "POST":
+        form = NewForm(request.POST)
+        if form.is_valid():
+            task = Task(
+                date=request.POST["date"],
+                title=request.POST["title"],
+                description=request.POST["description"],
+                user=request.user,
+            )
+            task.save()
+            return HttpResponse(
+                serializers.serialize("json", [task]),
+                content_type="application/json",
+            )
+    return HttpResponse("Invalid method", status_code=405)
