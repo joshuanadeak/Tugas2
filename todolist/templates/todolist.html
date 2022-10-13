@@ -1,4 +1,5 @@
-<!--Bagian Pembuatan Kartu ToDoList ini diinspirasi oleh pembuatan yang dilakukan oleh Rendy Arya Kemal-->
+<!--Bagian Pembuatan AJAX ini kebanyakan diinspirasi oleh pembuatan yang dilakukan oleh Rendy Arya Kemal, credits to him-->
+<!--Mohon maaf, sepertinya saya masih kurang memahami berkaitan dengan AJAX, sehingga saya akan coba nanti lagi untuk menyempurnakan program ini-->
 
 {% extends 'base.html' %}
 
@@ -22,7 +23,12 @@
         transform: scale(1.05);
         box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
     }
-    
+    form {
+        margin: auto;
+        width: 75%;
+        padding: 1em;
+        font-size: 15px;
+    }
     </style>
         <meta charset="utf-8">
         <title>My Own TodoList</title>
@@ -38,6 +44,7 @@
     <p style="color:white;">
         Greetings, {{ user.get_username }}!
     </p>
+    <label for="mymodal" class="btn btn-primary">Create New Task AJAX</label>
 
     <button><a class="btn btn-danger" href="{% url 'todolist:create_todolist' %}">Create New Task</a></button>
 
@@ -73,7 +80,106 @@
     {% endfor %}
   </div>
 
-  <script type="text/javascript">
-    
+  <div id="containerTodo" class="row row-cols-1 row-cols-md-3 g-4"></div>
+  <input type="checkbox" id="mymodal" class="modal-bs-toggle" />
+  <label for="mymodal" class="modal cursor-pointer">
+    <label for="" class="modal-box relative">
+      <form id="newForm" class="d-flex flex-column g-4">
+        {% csrf_token %}
+        <div class="form-control form-floating mb-3">
+          <label for="id_title">Title</label>
+          <input type="text" name="title" placeholder="Title" class="form-control rounded-md w-full" id="id_title">
+        </div>
+        <div class="form-control form-floating mb-3">
+          <label for="id_description">Description</label>
+          <textarea type="description" name="description" placeholder="Description" class="form-control rounded-md w-full" id="id_description"></textarea>
+        </div>
+        <div class="form-control form-floating mb-3">
+          <label for="id_date">Date</label>
+          <input type="date" name="date" placeholder="Date" class="form-control rounded-md w-full" id="id_date">
+        </div>
+      <div class="d-flex flex-column g-2 w-full">
+        <label for="mymodal" class="btn">Cancel</label>
+        <button class="btn btn-primary" id="newBtn">Create</button>
+      </form>
+      </div>
+
+  <script>
+    let container;
+    function renderer(todos) {
+      todos.map((todo) => {
+        const newNode = $(createNewTodoCard(todo.fields, todo.pk))
+        newNode.find(".removebtn").click(removeNewTodo)
+        container.append(newNode)
+      })
+    }
+  
+    function fetcher() {
+      container.empty()
+      $.get("{% url 'todolist:get_todo_json' %}", renderer)
+    }
+
+    function createNewTodoCard(id, todo) {
+      const { title, date, description} = todo
+      const isFinished = todo.is_finished ? "Finished" : "Not Finished"
+    return `
+      <div class="card bg-neutral text-neutral-content">
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">${title}</h2>
+          <h6 class="card-subtitle mb-2 text-muted">${date} | ${isFinished}</h6>
+          <p class="card-text">${description}<p>
+          
+          <div class="card-actions justify-end">
+            <form action="/todolist/update_todolist/${id}" method="POST">
+              {% csrf_token %}
+              <button class="btn btn-primary">Toggle Finish</button>
+            </form>
+            <form action="/todolist/delete_todolist/${id}" method="POST">
+              {% csrf_token %}
+              <button class="btn btn-danger" dataId="${id}>Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    `
+  }
+
+  function removeNewTodo(s) {
+    const id = $(s.target).data("id")
+    s.preventDefault()
+    $.ajax({
+      type: 'DELETE',
+      url: '/todolist/delete/json/' + id,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+      },
+      success: () => {
+        alert("Finished Processing...")
+        fetcher()
+      }
+    })
+  }
+
+  function createNewTodo(s) {
+    s.preventDefault()
+     $.ajax({
+      type: 'POST',
+      url: '/todolist/create/json',
+      data: $("#newForm").serialize(), 
+      success: () => {
+        alert("Done!")
+        $("#mymodal").click()
+        fetcher()
+      },
+      dataType: 'json'
+    });
+  }
+
+  $(document).ready(() => {
+    $("#newBtn").click(createNewTodo)
+    container = $("#containerTodo")
+    fetcher()
+  })
   </script>
+  
 {% endblock content %}
